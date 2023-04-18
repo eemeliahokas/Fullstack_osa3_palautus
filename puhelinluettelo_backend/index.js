@@ -48,6 +48,8 @@ app.get('/api/persons', (req, res) => {
   res.json(persons);
 });
 
+app.use(express.static('build'));
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
