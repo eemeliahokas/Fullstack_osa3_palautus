@@ -75,6 +75,13 @@ const App = () => {
         
       }
     } else {
+      if (newName.length < 3) {
+        setErrorStyle(error);
+        setErrorMessage(`Name must be at least 3 characters long`);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000); 
+    } else {
       personsService
         .create(personObject)
         .then(returnedPerson => {
@@ -89,7 +96,7 @@ const App = () => {
             setErrorMessage(null)
           }, 5000)
         });
-    }
+    }}
   };
 
   const deletePerson = (person) => {
@@ -99,7 +106,7 @@ const App = () => {
         .remove(person.id)
         .then(() => {
           setPersons(persons.filter(p => p.id !== person.id));
-          setErrorStyle(notification)
+          setErrorStyle(error)
           setErrorMessage(
             `Deleted ${person.name}`
           )
